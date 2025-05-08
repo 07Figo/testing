@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Product - Sarawak AgroConnect</title>
+    <link rel="stylesheet" href="styles-farmer.css">
+</head>
+<body>
+    <header>
+        <h1>Insert Product</h1>
+        <nav>
+            <ul>
+                <li><a href="main-page.html">Home</a></li>
+                <li><a href="insert_product.html">Insert Product</a></li>
+                <li><a href="display.html">View Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="insert-form-section">
+            <h2>Add a New Product</h2>
+            <form id="productForm" class="insert-form" enctype="multipart/form-data">
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" name="product_name" required>
+
+                <label for="productCategory">Category:</label>
+                <select id="productCategory" name="category" required>
+                    <option value="Vegetables">Vegetables</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Dairy">Dairy</option>
+                    <option value="Grains">Grains</option>
+                </select>
+
+                <label for="productPrice">Price (RM):</label>
+                <input type="number" id="productPrice" name="price" required>
+
+                <label for="productDescription">Description:</label>
+                <textarea id="productDescription" name="description" required></textarea> 
+                
+                <label for="userContact">Contact:</label>
+                <input type="text" id="user_contact" name="contact_number" required>
+
+                <label for="productImage">Upload Product Image:</label>
+                <input type="file" id="productImage" name="image" accept="image/*" required>
+
+                <button type="submit">Add Product</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        // Function to get the token from localStorage
+        function getToken() {
+            return localStorage.getItem('token');
+        }
+
+        // Handle form submission
+        document.getElementById("productForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            // Get the token from localStorage
+            const token = getToken();
+
+            if (!token) {
+                alert('You are not logged in. Please log in first.');
+                return;
+            }
+
+            const formData = new FormData(this);
+
+            // Sending the request with the Authorization header (Bearer token)
+            const response = await fetch("http://localhost:3000/upload", {
+                method: "POST",
+                headers: {
+                    'Authorization': `Bearer ${token}`,  // Attach the token here
+                },
+                body: formData
+            });
+
+            const result = await response.json();
+            if (result.productId) {
+                alert("Product added successfully!");
+                this.reset();  // Reset the form after successful submission
+            } else {
+                alert("Error adding product.");
+            }
+        });
+    </script>
+</body>
+</html>

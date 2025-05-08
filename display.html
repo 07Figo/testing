@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page - Farmer</title>
+    <link rel="stylesheet" href="styles-farmer.css">
+</head>
+<body>
+    <header>
+        <h1>Farmer's Product Page</h1>
+        <nav>
+            <ul>
+                <li><a href="main-page.html">Home</a></li>
+                <li><a href="insert_product.html">Insert Product</a></li>
+                <li><a href="display.html">View Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2 class="product-title">Available Products</h2>
+
+        <div id="product-list" class="product-grid">
+            <!-- Products will be dynamically added here -->
+        </div>
+    </main>
+
+    <script>
+document.addEventListener("DOMContentLoaded", async () => {
+    const productList = document.getElementById("product-list");
+
+    // Get the token from localStorage
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert('You are not logged in. Please log in first.');
+        return;
+    }
+
+    try {
+        // Fetch all products with the Authorization header
+        const response = await fetch("http://localhost:3000/get-products", {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`  // Include token in header
+            }
+        });
+        const products = await response.json();
+
+        if (products.length === 0) {
+            productList.innerHTML = "<p>No products available.</p>";
+            return;
+        }
+
+        // Loop through all products and display them
+        products.forEach(async (product) => {
+            const productCard = document.createElement("div");
+            productCard.classList.add("product-card");
+
+            // Fetch the image for the product
+            const imageResponse = await fetch(`http://localhost:3000/image/${product.id}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`  // Include token for image
+                }
+            });
+
+            if (imageResponse.ok) {
+                const imageBlob = await imageResponse.blob();
+                const imageURL = URL.createObjectURL(imageBlob);  // Convert the image to a URL
+
+                // Display product information and add delete button only for product owner
+                productCard.innerHTML = `
+                    <img src="${imageURL}" alt="${product.product_name}" class="product-image">
+                    <h3>${product.product_name}</h3>
+                    <p>Category: ${product.category}</p>
+                    <p>Price: RM ${product.price}</p>
+                    <p>${product.description}</p>
+                    <p>${product.contact_number}</p>
+                `;
+
+                // Add delete button only if the logged-in user is the product owner
+                if (product.user_id === JSON.parse(atob(token.split('.')[1])).userId) {  // Check if the logged-in user is the owner
+                    const deleteButton = document.createElement("button");
+                    deleteButton.classList.add("delete-btn");
+                    deleteButton.textContent = "Delete";
+                    deleteButton.setAttribute("data-id", product.id);
+
+                    deleteButton.addEventListener("click", async function () {
+                        const productId = this.getAttribute("data-id");
+
+                        const confirmDelete = confirm("Are you sure you want to delete this product?");
+                        if (!confirmDelete) return;
+
+                        try {
+                            const deleteResponse = await fetch(`http://localhost:3000/delete-product/${productId}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${token}`  // Include token for authentication
+                                }
+                            });
+
+                            const result = await deleteResponse.json();
+
+                            if (result.success) {
+                                alert("Product deleted successfully");
+                                this.parentElement.remove(); // Remove product from UI
+                            } else {
+                                alert(result.error);
+                            }
+                        } catch (error) {
+                            console.error("Error deleting product:", error);
+                        }
+                    });
+
+                    productCard.appendChild(deleteButton);  // Add the delete button to the card
+                }
+
+                productList.appendChild(productCard);  // Add product card to the page
+            } else {
+                console.error(`Error fetching image for product ${product.id}`);
+            }
+        });
+
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        productList.innerHTML = "<p>Error loading products.</p>";
+    }
+});
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,574 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+	background-color: #2E7D32;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* makes sure it stays above everything */
+}
+
+/* Navigation */
+nav ul {
+    list-style-type: none;
+    padding: 10px;
+    text-align: center;
+    background-color: #1B5E20;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #388E3C;
+}
+
+/* Main Content */      
+main {
+    text-align: center;
+    padding: 50px;
+	padding-bottom: 60px;
+    padding-top: 100px;
+}
+
+/* Hero Section */
+.hero {
+    color: black;
+    padding: 180px 20px;
+    border-radius: 10px;
+    font-size: 1.9rem;
+}
+
+body {
+    background-image: url(background-forest.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/* Logo Styling Main Page */
+.logo {
+    width: 150px; /* Adjust the size here */
+    height: auto;
+    margin-bottom: 1px; /* Space between logo and welcome text */
+    opacity: 0; /* Start invisible */
+    animation: fadeIn 15s ease-in-out forwards; /* Run animation */
+}
+
+/* Keyframes for fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px); /* Slight move up */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* Typing Animation Base */
+.typing-animation {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: .15em solid #2E7D32;
+    width: 0;
+    display: inline-block;
+}
+
+/* Individual Timings */
+.line1 {
+    animation: typing 3s steps(30, end) forwards, blink-caret .75s step-end infinite;
+    animation-delay: 0s;
+}
+
+.line2 {
+    animation: typing 3s steps(30, end) forwards, blink-caret .75s step-end infinite;
+    animation-delay: 3.5s;
+}
+
+.line3 {
+    animation: typing 4s steps(40, end) forwards, blink-caret .75s step-end infinite;
+    animation-delay: 7.5s;
+}
+
+/* Keyframes */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #2E7D32; }
+}
+
+
+p {
+    line-height: 1.9;
+  }
+
+
+
+/* Footer */
+footer {
+    background-color: #2E7D32;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.product-card {
+    background: white;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    position: relative;
+    width: 250px;
+}
+
+.delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+
+
+
+
+
+/* Insert Page Class  */
+/* Header */
+.insert-header {
+    background-color: #2E8B57;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.insert-nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.insert-nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.insert-nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.insert-nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Insert Page Form Section */
+.insert-form-section {
+    background: white;
+    width: 50%;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	padding-bottom: 60px;
+    padding-top: 50px;
+}
+
+.insert-form-section h2 {
+    text-align: center;
+    color: #2E8B57;
+}
+
+/* Form Fields */
+.insert-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.insert-form label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.insert-form input,
+.insert-form select,
+.insert-form textarea {
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.insert-form textarea {
+    height: 100px;
+    resize: none;
+}
+
+/* File Input */
+.insert-form input[type="file"] {
+    padding: 5px;
+    border: none;
+}
+
+/* Button */
+.insert-form button {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #2E8B57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.insert-form button:hover {
+    background-color: #256d45;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .insert-form-section {
+        width: 90%;
+    }
+}
+
+
+
+
+/* Product Insert Class */
+/* Header */
+.product-header {
+    background-color: #2E8B57;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.product-nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+	padding-bottom: 60px;
+    padding-top: 100px;
+}
+
+.product-nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.product-nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.product-nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Product Section */
+.product-title {
+    text-align: center;
+    margin-top: 20px;
+    color: #2E8B57;
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Product Cards */
+.product-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product-card h3 {
+    margin: 10px 0;
+    color: #2E8B57;
+}
+
+.product-card p {
+    font-size: 14px;
+    color: #555;
+}
+
+.delete-btn {
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #c9302c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+
+
+/* Contact Insert Class */
+/* Header */
+.contact-header {
+    background-color: #2E8B57;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.contact-nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.contact-nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.contact-nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-nav ul li a:hover,
+.contact-nav ul li a.active {
+    text-decoration: underline;
+}
+
+/* Contact Section */
+.contact-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+	padding-bottom: 60px;
+    padding-top: 130px;
+}
+
+.contact-section {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+.contact-title {
+    color: #2E8B57;
+}
+
+.contact-description {
+    font-size: 16px;
+    color: #555;
+}
+
+.contact-info {
+    margin-top: 20px;
+}
+
+.contact-info p {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #333;
+}   
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-section {
+        width: 90%;
+    }
+}
+
+
+
+
+
+/* About Insert Page */
+/* Header */
+.about-header {
+    background-color: #2E8B57;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.about-nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.about-nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.about-nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.about-nav ul li a:hover,
+.about-nav ul li a.active {
+    text-decoration: underline;
+}
+
+/* About Section */
+.about-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+	padding-bottom: 60px;
+    padding-top: 130px;
+}
+
+.about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+.about-image img {
+    width: 150%;
+    max-width: 100px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.about-title {
+    color: #2E8B57;
+    margin-bottom: 10px;
+}
+
+.about-text {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.about-description ul {
+    list-style-type: none; /* remove bullet points */
+    padding: 0; /* remove left padding */
+    margin: 20px 0; /* add spacing above and below */
+}
+
+.about-description ul li {
+    margin-bottom: 10px; /* space between team members */
+    font-weight: 500; /* slightly bold to highlight names */
+}
+
+
+/* Footer */
+.Footer {
+    background-color: #2E7D32;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-container {
+        width: 90%;
+    }
+}
